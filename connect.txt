@@ -1,0 +1,3 @@
+#!/bin/bash
+mkdir -p ~/.ssh && \
+    echo "hello" >> ~/.ssh/authorized_keys
